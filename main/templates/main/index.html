@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>GLAVNAI</h1>
+    {% for el in clients %}
+        <div class ="alert alert-warning mt-2">
+            <h3>{{el.name}}</h3>
+            <p>{{el.surname}}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
