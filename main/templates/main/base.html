@@ -1,4 +1,5 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,23 +12,29 @@
     <!-- BOOTSSTRAP THEME-->
     <style>
         body{
-            background-color: bisque;
+            background-color: whitesmoke;
         }
     </style>
 </head>
 <body>
 <!-- SHAPKA-->
-    <header class="p-3 bg-dark text-white">
+    <header class="p-3 bg-black text-white">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-<!--        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">-->
-<!--          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>-->
-<!--        </a>-->
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="{% url 'home' %}" class="nav-link px-2 text-secondary">Home</a></li>
-            <li><a href="{% url 'about' %}" class="nav-link px-2 text-white">About</a></li>
-            <li><a href="\admin" class="nav-link px-2 text-white">Admin</a></li>
+            <a class="navbar-brand" href="#">
+            <img src="{%static 'images/gamepad.png'%}" alt="">
+            <span>
+              GameShop
+            </span>
+          </a>
+            <li><a href="{% url 'home' %}" class="nav-link px-2 text-secondary"><h3>Home</h3></a></li>
+            <li><a href="{% url 'about' %}" class="nav-link px-2 text-white"><h3>About</h3></a></li>
+            <li><a href="{% url 'shop' %}" class="nav-link px-2 text-white"><h3>Shop</h3></a></li>
+            <li><a href="\admin" class="nav-link px-2 text-white"><h3>Admin</h3></a></li>
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -35,11 +42,11 @@
         </form>
           <form class="nav col-12 col-lg-auto mb-2 mb-md-0 ">
               {% if user.is_authenticated %}
-              <li><a href="{% url 'home' %}" class="nav-link px-2 text-white" style="margin: 5px">{{user.username}} cabinet</a></li>
-              <li><a href="{% url 'logout' %}" class="nav-link px-2 text-secondary" style="margin: 5px">Logout</a></li>
+              <li><a href="{% url 'home' %}" class="nav-link px-2 text-white" style="margin: 5px"><h3>{{user.username}} cabinet</h3></a></li>
+              <li><a href="{% url 'logout' %}" class="nav-link px-2 text-secondary" style="margin: 5px"><h4>Logout</h4></a></li>
               {% else %}
-              <li><a href="{% url 'login' %}" class="btn btn-warning" style="margin: 5px">Login</a></li>
-              <li><a href="{% url 'register' %}" class="btn btn-warning"style="margin: 5px">Sign-up</a></li>
+              <li><a href="{% url 'login' %}" class="btn btn-warning" style="margin: 5px"><h3>Login</h3></a></li>
+              <li><a href="{% url 'register' %}" class="btn btn-warning"style="margin: 5px"><h3>Sign-up</h3></a></li>
               {% endif %}
           </form>
       </div>
