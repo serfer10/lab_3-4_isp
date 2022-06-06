@@ -1,9 +1,56 @@
 {% extends 'main/base.html' %}
-
+{% load static%}
 {% block title %}
-ABOUT
+Product
 {% endblock %}
 
 {% block content %}
+<section class="about_section layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="detail-box">
+            <h6>
+              {{pr.group}}
+            </h6>
+            <div class="custom_heading-container">
+              <h2>
+                {{pr.name}}
+              </h2>
+              <hr>
+            </div>
+            <p>
+              Price:{{pr.price}}$
+            </p>
+            <p>
+              {{pr.description}}
+            </p>
 
+            <div class="d-flex justify-content-between align-items-center" style="margin-top: 250px">
+                <div class="btn-group">
+                  {%if pr.available == False%}
+                    <button type="button" class="btn btn-secondary my-2" >
+                      {{pr.price}}$
+                    </button>
+                  {% else %}
+                    <form action="{% url 'cart:cart_add' pr.id %}" method="post">
+                        {{ cart_product_form }}
+                        {%csrf_token%}
+                        <input class="btn btn-primary my-2" type ="submit" value="{{pr.price}}$">
+                    </form>
+                  {% endif %}
+                </div>
+              </div>
+
+          </form>
+          </div>
+        </div>
+        <div class="col-md-6" >
+          <div class="img-box">
+            <img src="{{pr.image.url}}" style="height: 700px" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
 {% endblock %}

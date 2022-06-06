@@ -1,0 +1,54 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}
+    Your shopping cart
+{% endblock %}
+
+{% block content %}
+    <h1>Your shopping cart</h1>
+    <table class="cart" >
+        <thead >
+        <tr>
+                <th><h3 class="fw-light" style="margin-right: 20px">Image</h3></th>
+                <th><h3 class="fw-light" style="margin-right: 20px">Product</h3></th>
+                <th><h3 class="fw-light" style="margin-right: 20px">Quantity</h3></th>
+                <th><h3 class="fw-light" style="margin-right: 20px">Remove</h3></th>
+                <th><h3 class="fw-light" style="margin-right: 20px">Unit price</h3></th>
+                <th><h3 class="fw-light" style="margin-right: 20px">All</h3></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+            {% with product=item.product %}
+                <tr>
+                    <td>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="
+                                {% if product.image %}
+                                    {{ product.image.url }}
+                                {% else %}
+                                    {% static 'images/no_image.png' %}
+                                {% endif %}" style="height: 100px;width: 100px">
+                        </a>
+                    </td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td><a href="{% url 'cart:cart_remove' product.id%}">Remove</a></td>
+                    <td class="num">${{ item.price }}</td>
+                    <td class="num">${{ item.total_price }}</td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td><h3 class="fw-light" style="margin-right: 20px">Total</h3></td>
+            <td colspan="4"></td>
+            <td class="num">${{ cart.get_total_price }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right" style="margin-right: 150px">
+        <a href="{% url 'shop' %}" class="nav-link px-2 text-secondary">Continue shopping</a>
+        <a href="{% url 'orders:order_create' %}" class="nav-link px-2 text-secondary" style="margin-left: 30px">Checkout</a>
+    </p>
+{% endblock %}
